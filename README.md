@@ -35,6 +35,7 @@ As views:
 	Index.Users:
 		Tela com a relação dos usuários cadastrados.
 		Possui um botão para editar e outro para apagar cada registro da lista.
+		Ao excluir um usuário, o mesmo será notificado via e-mail.
 		Um usuário não pode excluir a si mesmo.
 		A partir dessa dela pode se acessar o cadastro de novos usuários.
 		Um alerta é mostrado em caso de sucesso ou falha no "delete" de um usuário.
@@ -47,6 +48,7 @@ As views:
 		A validação dos dados é feita na API, utilizando o Validator do Laravel. 
 		O campo e-mail é único na tabela 'users', excluindo o usuário que está sendo editado dessa regra.
 		Um alerta é mostrado em caso de sucesso ou falha no "save" ou "update" de um novo usuário.
+		Após a criação ou atualização do usuário, um e-mail é enviado para o mesmo.
 		Só pode ser acessada por usuários autenticados.
 		
 	Index.Tasks:
