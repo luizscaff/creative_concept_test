@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Mail\UserStoredMail;
+use App\Mail\UserUpdatedMail;
+use App\Mail\UserDeletedMail;
 
 use Auth;
+use DB;
 use Hash;
 
 class UserController extends Controller
@@ -49,13 +54,18 @@ class UserController extends Controller
   {
     try
     {
-      $name     = $request["name"];
-      $email    = $request["email"];
-      $password = Hash::make($request["password"]);
-
-      $this->Save($name, $email, $password);
-
-      return response()->json("Registro criado com sucesso", 200);
+      return DB::transaction(function() use($request)
+      {
+        $name     = $request["name"];
+        $email    = $request["email"];
+        $password = Hash::make($request["password"]);
+  
+        $user = $this->Save($name, $email, $password);
+  
+        Mail::to($email)->send(new UserStoredMail($user));
+  
+        return response()->json("Registro criado com sucesso", 200);
+      });
     }
     catch(\Exception $e)
     {
@@ -69,15 +79,20 @@ class UserController extends Controller
   {
     try
     {
-      $name     = $request["name"];
-      $email    = $request["email"];
+      return DB::transaction(function() use($request, $id)
+      {
+        $name     = $request["name"];
+        $email    = $request["email"];
 
-      if(isset($request["password"]))
-        $password = Hash::make($request["password"]);
+        if(isset($request["password"]))
+          $password = Hash::make($request["password"]);
 
-      $this->Save($name, $email, $password, $id);
+        $user = $this->Save($name, $email, $password, $id);
 
-      return response()->json("Registro atualizado com sucesso", 200);
+        Mail::to($email)->send(new UserUpdatedMail($user));
+
+        return response()->json("Registro atualizado com sucesso", 200);
+      });
     }
     catch(\Exception $e)
     {
@@ -101,6 +116,8 @@ class UserController extends Controller
       $user->password = $password;
 
     $user->save();
+
+    return $user;
   }
 
   //----------------------------------------------------------------------------------
@@ -109,13 +126,19 @@ class UserController extends Controller
   {
     try
     {
-      if(Auth::user()->id == $id)
-        return response()->json("Você não pode excluir a si mesmo", 401);
+      return DB::transaction(function() use($id)
+      {
+        if(Auth::user()->id == $id)
+          return response()->json("Você não pode excluir a si mesmo", 401);
 
-      $user = User::findOrFail($id);
-      $user->delete();
+        $user = User::findOrFail($id);
 
-      return response()->json("Registro excluído com sucesso", 200);
+        Mail::to($user->email)->send(new UserDeletedMail($user));
+
+        $user->delete();
+
+        return response()->json("Registro excluído com sucesso", 200);
+      });
     }
     catch(\Exception $e)
     {
