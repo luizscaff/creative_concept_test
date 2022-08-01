@@ -56,7 +56,7 @@ As views:
 		
 	Edit.Tasks:
 		Tela para cadastro de novas tarefas ou edição de tarefas existentes contendo os campos "nome", "prazo", "responsável" e "situação". 
-		Apenas o campo "responsável" não é obrigatório.
+		Todos os campos são obrigatórios.
 		Os campos "responsável" e "situação" utilizam uma chave estrangeira para as tabelas "users" e "TaskStatus", respectivamente.
 		Um alerta é mostrado em caso de sucesso ou falha no "save" ou "update" de uma nova tarefa.
 		Só pode ser acessada por usuários autenticados.
