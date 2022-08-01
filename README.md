@@ -1,4 +1,4 @@
-Olá, me chamo Luiz Gustavo Miquelão caff e esse é o meu desafio programador VueJS/PHP da Creative Concept!
+Olá, me chamo Luiz Gustavo Miquelão Scaff e esse é o meu desafio programador VueJS/PHP da Creative Concept!
 
 ---------------------------------------------------------------------------------------------------------
 
@@ -44,7 +44,8 @@ As views:
 		Tela para cadastro de novos usuários ou edição de usuários existentes contendo os campos "nome", "e-mail", "senha" e "confirmação de senha".
 		Caso seja um cadastro de um novo usuário, todos os campos são obrigatórios.
 		Caso seja uma edição, apenas os campos "nome" e "e-mail" são obrigatórios - os campos de senha só serão preenchidos caso o usuário deseje alterar sua senha. 
-		A validação dos dados é feita na API, utilizando o Validator do Laravel. O campo e-mail é único na tabela 'users', excluindo o usuário que está sendo editado dessa regra.
+		A validação dos dados é feita na API, utilizando o Validator do Laravel. 
+		O campo e-mail é único na tabela 'users', excluindo o usuário que está sendo editado dessa regra.
 		Um alerta é mostrado em caso de sucesso ou falha no "save" ou "update" de um novo usuário.
 		Só pode ser acessada por usuários autenticados.
 		
