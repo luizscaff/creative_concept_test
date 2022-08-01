@@ -2,7 +2,7 @@
   <div class="">
     <b-button v-on:click="backToIndex()" variant="primary m-3">Voltar</b-button>
 
-    <h2><center>Nova Tarefa</center></h2>
+    <h2><center>{{ headerMessage }}</center></h2>
 
     <b-alert class="w-75 mx-auto" variant="success" :show="alertSuccess" fade>Registro salvo com sucesso!</b-alert>
     <b-alert class="w-75 mx-auto" variant="danger" :show="alertDanger" fade>Houve uma exceção</b-alert>
@@ -52,7 +52,8 @@ export default {
         { value: null, text: 'Selecione uma opção' }
       ],
       alertSuccess: false,
-      alertDanger: false
+      alertDanger: false,
+      headerMessage: "Nova Tarefa"
     }
   },
   created()
@@ -60,6 +61,7 @@ export default {
     var id_task_edit = this.$route.params.id;
     if(id_task_edit)
     {
+      this.headerMessage = "Editando Tarefa";
       axios.get('http://127.0.0.1:8000/api/tasks/' + id_task_edit,
       {
         headers:
