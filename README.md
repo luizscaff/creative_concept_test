@@ -1,5 +1,3 @@
-Olá, me chamo Luiz Gustavo Miquelão Scaff e esse é o meu desafio programador VueJS/PHP da Creative Concept!
-
 /**
 *
 * Esse projeto foi feito inicialmente como um teste para uma vaga de desenvolvedor Laravel/VueJs
