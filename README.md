@@ -1,5 +1,13 @@
 Olá, me chamo Luiz Gustavo Miquelão Scaff e esse é o meu desafio programador VueJS/PHP da Creative Concept!
 
+/**
+*
+* Esse projeto foi feito inicialmente como um teste para uma vaga de desenvolvedor Laravel/VueJs
+*
+* Não possuo experiência em VueJS.
+*
+*/
+
 ---------------------------------------------------------------------------------------------------------
 
 Ferramentas utilizadas no frontend - VueJS, VueRouter, VueAxios, JWT-Auth e Bootstrap-vue
